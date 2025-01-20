@@ -73,3 +73,13 @@ output "db_user" {
   description = "The username for the MySQL database"
   value       = aws_db_instance.mysql.username
 }
+
+output "rds_endpoint" {
+  value = aws_db_instance.mysql.endpoint
+}
+
+
+output "wordpress_alb_dns" {
+  value = aws_lb.wordpress_lb.dns_name
+}
+

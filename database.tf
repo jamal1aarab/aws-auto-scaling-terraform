@@ -1,7 +1,7 @@
-# MySQL RDS Subnet Group (using private subnets)
+# MySQL RDS Subnet Group
 resource "aws_db_subnet_group" "mysql_subnets" {
   name       = "mysql-subnet-group"
-  subnet_ids = aws_subnet.private_subnet[*].id  # Using private subnets for MySQL DB
+  subnet_ids = aws_subnet.private_subnet[*].id 
 
   tags = {
     Name = "MySQL Subnet Group"

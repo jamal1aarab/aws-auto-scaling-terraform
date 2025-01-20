@@ -8,20 +8,6 @@ resource "aws_vpc" "main" {
   }
 }
 
-# Create Public Subnet
-resource "aws_subnet" "public_subnet" {
-    vpc_id                  = aws_vpc.main.id
-    cidr_block              = "10.0.1.0/24"
-    count                  = length(var.availability_zones)
-    availability_zone       = element(var.availability_zones, count.index)
-    # availability_zone = var.availability_zone
-    map_public_ip_on_launch = true
-    tags = {
-        Name = "Public Subnet ${count.index + 1}"
-        # Name = "Public Subnet"
-    }
-}
-
 # Create Internet Gateway
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
@@ -42,10 +28,22 @@ resource "aws_route_table" "main" {
   }
 }
 
+# Create Public Subnets
+resource "aws_subnet" "public_subnet" {
+  count                  = length(var.availability_zones)
+  vpc_id                 = aws_vpc.main.id
+  cidr_block             = cidrsubnet("10.0.0.0/16", 8, count.index)
+  availability_zone      = element(var.availability_zones, count.index)
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "Public Subnet ${count.index + 1}"
+  }
+}
+
 # Associate Route Table with the Public Subnet
 resource "aws_route_table_association" "public_subnet_association" {
     count              = length(var.availability_zones)
-    subnet_id          = aws_subnet.public_subnet [count.index + 1].id
+    subnet_id          = aws_subnet.public_subnet[count.index].id
     route_table_id     = aws_route_table.main.id
 }
 
@@ -61,6 +59,7 @@ resource "aws_security_group" "allow_http" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 }
+
 
 # IAM Role for Auto Scaling
 resource "aws_iam_role" "auto_scaling_role" {

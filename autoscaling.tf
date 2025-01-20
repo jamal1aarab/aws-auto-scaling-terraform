@@ -19,22 +19,22 @@ resource "aws_autoscaling_group" "asg" {
     desired_capacity       = var.desired_capacity
     min_size               = var.min_size
     max_size               = var.max_size
-    count                 = length(var.availability_zones)
-    vpc_zone_identifier    = [aws_subnet.public_subnet [count.index +1].id]
+    vpc_zone_identifier    = aws_subnet.public_subnet[*].id  # Include all public subnets
 
-  launch_template {
-    id       = aws_launch_template.ec2_launch_template.id
-    version  = aws_launch_template.ec2_launch_template.latest_version
-  }
+    launch_template {
+        id       = aws_launch_template.ec2_launch_template.id
+        version  = aws_launch_template.ec2_launch_template.latest_version
+    }
 
     health_check_type          = "EC2"
     health_check_grace_period  = 300
     force_delete               = true
-    wait_for_capacity_timeout   = "0"
+    wait_for_capacity_timeout  = "0"
 }
 
 
-# Scaling policies (optional)
+
+# Scaling policies
 resource "aws_autoscaling_policy" "scale_up" {
   name                   = "scale_up"
   scaling_adjustment     = 1
@@ -43,7 +43,6 @@ resource "aws_autoscaling_policy" "scale_up" {
   metric_aggregation_type = "Average"
   autoscaling_group_name = aws_autoscaling_group.asg.name
 }
-
 resource "aws_autoscaling_policy" "scale_down" {
   name                   = "scale_down"
   scaling_adjustment     = -1

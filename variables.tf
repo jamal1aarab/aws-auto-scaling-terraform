@@ -9,32 +9,6 @@ variable "availability_zones" {
   default     = ["eu-west-2a", "eu-west-2b"]
 }
 
-# variable "availability_zone" {
-#   description = "Availability Zone for the Auto Scaling group"
-#   type        = string
-#   default     = "eu-west-2a"
-# }
-
-
-# data "aws_ami" "latest_amazon_linux" {
-#   most_recent = true
-#   owners      = ["amazon"]
-#   filter {
-#     name   = "name"
-#     values = ["amzn2-ami-hvm-*-x86_64-gp2"]
-#   }
-# }
-
-# variable "latest_amazon_linux" {
-#   description = "AMI ID used for EC2 instances"
-#   default     = data.aws_ami.latest_amazon_linux.id
-# }
-
-# output "latest_amazon_linux" {
-#   description = "AMI ID used for EC2 instances"
-#   value       = data.aws_ami.latest_amazon_linux.id
-# }
-
 variable "debian_ami" {
   description = "Debian AMI ID"
   default     = "ami-0efc5833b9d584374"
@@ -58,4 +32,49 @@ variable "max_size" {
 variable "desired_capacity" {
   description = "Desired number of instances in Auto Scaling group"
   default     = 2
+}
+
+
+# Variables for the MySQL RDS instance
+
+variable "db_name" {
+  description = "The name of the MySQL database"
+  type        = string
+  default     = "wordpress-db"
+}
+
+variable "db_username" {
+  description = "The username for the MySQL database"
+  type        = string
+  default     = "admin"
+}
+
+variable "db_password" {
+  description = "The password for the MySQL database"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_port" {
+  description = "The port for the MySQL database"
+  type        = number
+  default     = 3306
+}
+
+variable "db_instance_class" {
+  description = "The instance class for the MySQL database"
+  type        = string
+  default     = "db.t3.micro"
+}
+
+variable "db_allocated_storage" {
+  description = "The allocated storage size in GB for the MySQL database"
+  type        = number
+  default     = 20
+}
+
+variable "db_storage_type" {
+  description = "The storage type for the MySQL database (e.g., gp2, io1)"
+  type        = string
+  default     = "gp2"
 }

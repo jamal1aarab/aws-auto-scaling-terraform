@@ -9,6 +9,20 @@ variable "availability_zones" {
   default     = ["eu-west-2a", "eu-west-2b"]
 }
 
+locals {
+  # Public Subnet CIDR Blocks
+  public_subnet_cidr_blocks = [
+    for i in range(length(var.availability_zones)) : cidrsubnet("10.0.0.0/16", 8, i)
+  ]
+  
+  # Private Subnet CIDR Blocks
+  private_subnet_cidr_blocks = [
+    for i in range(length(var.availability_zones)) : cidrsubnet("10.0.0.0/16", 8, i + length(var.availability_zones))
+  ]
+}
+
+
+
 variable "debian_ami" {
   description = "Debian AMI ID"
   default     = "ami-0efc5833b9d584374"
@@ -33,7 +47,6 @@ variable "desired_capacity" {
   description = "Desired number of instances in Auto Scaling group"
   default     = 2
 }
-
 
 # Variables for the MySQL RDS instance
 

@@ -32,7 +32,7 @@ resource "aws_route_table" "main" {
 resource "aws_subnet" "public_subnet" {
   count                  = length(var.availability_zones)
   vpc_id                 = aws_vpc.main.id
-  cidr_block             = cidrsubnet("10.0.0.0/16", 8, count.index)
+  cidr_block             = local.public_subnet_cidr_blocks[count.index]
   availability_zone      = element(var.availability_zones, count.index)
   map_public_ip_on_launch = true
   tags = {

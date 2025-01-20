@@ -108,16 +108,6 @@ During the development of this project, we encountered several challenges:
 
 ---
 
-## Why Choose WordPress?
-
-WordPress was chosen for this project for several reasons:
-- **Simplicity**: WordPress is one of the easiest content management systems (CMS) to set up and configure. It also has a vast ecosystem of plugins and themes, making it a flexible option for most web applications.
-- **Wide Adoption**: WordPress is the most widely used CMS globally, meaning it has extensive community support, which made troubleshooting and setup easier.
-- **Auto-Scaling**: While WordPress does not natively support auto-scaling, we used AWS’s Auto Scaling Group (ASG) to handle scaling based on demand. This way, we ensure high availability and scalability of the WordPress application.
-
-By opting for WordPress, we were able to create a reliable and scalable web application that could be easily managed on AWS, with automatic scaling in response to varying traffic levels.
-
----
 
 ## Conclusion
 

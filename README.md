@@ -1,25 +1,34 @@
-# Project: WordPress on AWS with Auto Scaling
+# Scalable WordPress Deployment on AWS with Terraform
 
-## Réalisé Par
-- AARAB Jamal
-- BOUALI Haytham
-- EL-FLOUCHI Mohammed
-- TABARANI Ibtihal
+## Realized By:
+- **AARAB Jamal**  
+- **BOUALI Haytham**  
+- **EL-FLOUCHI Mohammed**  
+- **TABARANI Ibtihal**  
+
+---
 
 ## Acknowledgments
-We would like to express our sincere gratitude to Mr. SOUFIANE, our encadrant, for his continuous guidance, support, and valuable feedback throughout this project. His expertise was crucial in the successful completion of this work.
+
+We would like to express our sincere gratitude to Mr. SOUFIANE, our supervisor, for his continuous guidance, support, and valuable feedback. 
+
+Last year, under his supervision, we had the opportunity to explore various aspects of AWS, which opened our eyes to the vast possibilities of cloud computing. Through hands-on experience, we delved into topics such as networking, security, scalability, and resource optimization in the AWS ecosystem. 
+
+This year, we have built upon that foundation by utilizing Terraform to deploy a demo application, WordPress, as an example of a scalable and resilient architecture. The skills and knowledge we gained under his guidance have directly influenced the design and implementation of this project.
 
 ---
 
 ## Introduction
 
-This project focuses on deploying a highly available WordPress application on AWS using Terraform. We are leveraging AWS features such as Auto Scaling Groups (ASG), Load Balancers, MySQL RDS for database management, and various networking configurations to ensure that the WordPress application is scalable and fault-tolerant.
+This project demonstrates the deployment of a highly available WordPress application on AWS using Terraform. By leveraging AWS features such as **Auto Scaling Groups (ASG)**, **Elastic Load Balancers (ELB)**, and **Amazon RDS with MySQL**, alongside Terraform for infrastructure-as-code, we aim to showcase how to build scalable, fault-tolerant, and cost-effective solutions. 
+
+Our objective is to present a practical example of Infrastructure-as-Code (IaC) while applying industry standards in cloud architecture. This project serves as a culmination of the AWS knowledge gained last year and highlights how these services can be orchestrated effectively using Terraform.
 
 ---
 
 ## Why WordPress?
 
-WordPress was selected for this project for several reasons:
+WordPress was selected as a demo application due to its simplicity and widespread documentation, allowing us to focus on implementing best practices for cloud infrastructure rather than application complexities.
 - **Simplicity**: WordPress is a user-friendly platform that is easy to set up and configure, especially with the vast amount of documentation available.
 - **Widespread Adoption**: It powers a significant portion of the internet and is known for its compatibility with various hosting environments.
 - **Auto-Scaling Support**: Despite the fact that WordPress itself does not natively support auto-scaling, it was chosen due to the lack of alternative applications that could be easily configured to auto-scale.
